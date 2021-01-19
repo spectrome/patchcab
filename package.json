@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "patchcab",
+  "workspaces": [
+    "core",
+    "modules"
+  ],
+  "dependencies": {}
+}

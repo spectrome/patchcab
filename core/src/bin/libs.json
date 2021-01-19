@@ -1,0 +1,10 @@
+{
+  "Tone": {
+    "cdn": "https://unpkg.com/tone@14.7.77/build/Tone.js",
+    "alias": "Tone"
+  },
+  "THREE": {
+    "cdn": "https://unpkg.com/three@0.116.1/build/three.min.js",
+    "alias": "THREE"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "lib": ["es6", "dom", "es2019"],
+    "module": "es2015",
+    "target": "es2019",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "outDir": "./public/js",
+    "importsNotUsedAsValues": "error",
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "src",
+    "paths": {
+      "@patchcab/core": ["./"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

@@ -1,0 +1,224 @@
+{
+  "name": "@patchcab/modules",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "Spectrome <rihards@gravis.lv>",
+  "files": [
+    "modules"
+  ],
+  "scripts": {
+    "start": "patchcab",
+    "build": "patchcab --build",
+    "prepublish": "yarn build"
+  },
+  "patchcab": [
+    {
+      "name": "ADSR",
+      "file": "ADSR",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "envelope"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "Clock",
+      "file": "Clock",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "clock"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "LFO",
+      "file": "LFO",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "oscillator"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "MIDI",
+      "file": "MIDI",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "midi"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "Notes",
+      "file": "Notes",
+      "size": {
+        "w": 12,
+        "h": 1
+      },
+      "tags": [
+        "utility"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "OUT",
+      "file": "OUT",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "mixer"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "VOL",
+      "file": "VOL",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "mixer"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "SCOPE",
+      "file": "SCOPE",
+      "size": {
+        "w": 12,
+        "h": 1
+      },
+      "tags": [
+        "utility"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "VCF",
+      "file": "VCF",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "filter"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "OSC",
+      "file": "OSC",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "oscillator"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "FM",
+      "file": "FM",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "oscillator"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "SEQ",
+      "file": "SEQ",
+      "size": {
+        "w": 32,
+        "h": 1
+      },
+      "tags": [
+        "utility"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "NOISE",
+      "file": "NOISE",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "noise"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    },
+    {
+      "name": "REVRB",
+      "file": "REVRB",
+      "size": {
+        "w": 6,
+        "h": 1
+      },
+      "tags": [
+        "effect"
+      ],
+      "libs": [
+        "Tone"
+      ]
+    }
+  ],
+  "prettier": {
+    "useTabs": false,
+    "arrowParens": "always",
+    "semi": true,
+    "bracketSpacing": true,
+    "singleQuote": true,
+    "printWidth": 120,
+    "svelteSortOrder": "options-scripts-styles-markup"
+  },
+  "devDependencies": {
+    "@patchcab/core": "1.0.0"
+  }
+}

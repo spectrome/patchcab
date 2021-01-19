@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"declarationMap": true,
+		"baseUrl": "src",
+		"paths": {
+			"@patchcab/core": ["../../core/src"]
+		}
+	}
+}

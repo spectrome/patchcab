@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "../bin",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "include": ["../src/bin/bin.ts"]
+}
