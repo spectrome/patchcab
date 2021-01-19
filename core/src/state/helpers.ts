@@ -38,11 +38,11 @@ const stateImport = (state: Rack, library: Library): void => {
   patches.import($patches);
 };
 
-const stateExport = (): Rack => {
+const stateExport = (title: string): Rack => {
   const $patches = patches.export();
   const $modules = modules.export();
 
-  return { modules: $modules, patches: $patches };
+  return { title, modules: $modules, patches: $patches };
 };
 
 const stateReset = (): void => {

@@ -1,14 +1,18 @@
 # 🎛 Patchcab
 
-<img src="./core/public/assets/preview@2x.png" alt="Patchcab" width="600" height="315" />
+<img src="https://raw.githubusercontent.com/spectrome/patchcab/main/core/public/assets/preview@2x.png" alt="Patchcab" width="600" height="315" />
 
-## Patchcab is a modular Eurorack style synthesizer made with Web Audio.
+### Patchcab is a modular Eurorack style synthesizer made with Web Audio.
 
 Modules are built using [Tone.js Web Audio framework](https://github.com/Tonejs/Tone.js/) and [Svelte Javascript framework](https://github.com/sveltejs/svelte). Patchcab is heavily inspired by [VCV Eurorack Simulator](https://vcvrack.com).
+
+---
 
 ### 🎛 Patch and play
 
 Go to **https://patch.cab** to create, share and remix synths with community made modules.
+
+---
 
 ### 💾 Run locally
 
@@ -31,6 +35,8 @@ npx patchcab
 ```
 
 And finally - open the address http://localhost:3000 in your browser 🤘
+
+---
 
 ### 🎚 Build modules
 

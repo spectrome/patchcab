@@ -23,7 +23,7 @@
   };
 
   const onExport = () => {
-    const $rack = stateExport();
+    const $rack = stateExport(title);
     const blob = new Blob([JSON.stringify($rack) as BlobPart], {
       type: 'application/json;charset=utf-8',
     });

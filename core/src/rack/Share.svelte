@@ -1,8 +1,7 @@
 <script lang="ts">
   import Menu from './Menu.svelte';
   import Loading from './Loading.svelte';
-  import modules from '../state/modules';
-  import patches from '../state/patches';
+  import { stateExport } from '../state/helpers';
 
   export let api: string;
   export let title: string;
@@ -18,15 +17,14 @@
 
     loading = true;
 
-    const $patches = patches.export();
-    const $modules = modules.export();
+    const $rack = stateExport(title);
 
     const response = await fetch(`${api}/share`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ title, rack: { modules: $modules, patches: $patches } }),
+      body: JSON.stringify($rack),
     });
 
     const data = await response.json();

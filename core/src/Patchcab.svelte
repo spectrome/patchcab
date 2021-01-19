@@ -27,16 +27,16 @@
 
     if (api) {
       const path = location.pathname;
-      if (path.length === 11) {
+      if (path.length === 9) {
         loading = true;
         title = '';
 
         try {
           const response = await fetch(`${api}?url=${path.substr(1)}`);
-          const data = await response.json();
+          const data = (await response.json()) as { rack: Rack; url: string };
 
           stateImport(data.rack, library);
-          title = data.title;
+          title = data.rack.title;
 
           loading = false;
 
