@@ -99,7 +99,11 @@ const bin = async (): Promise<void> => {
       }
 
       dependencyConfig.patchcab.forEach((item) => {
-        if (typeof item === 'object' && item.file && existsSync(resolve(dependencyDir, `./modules/${item.file}.js`))) {
+        if (
+          typeof item === 'object' &&
+          item.name &&
+          existsSync(resolve(dependencyDir, `./modules/${safeName(item.name)}.js`))
+        ) {
           const setName = dependencyConfig.name.replace(/\//g, '-');
 
           const author =
@@ -123,11 +127,11 @@ const bin = async (): Promise<void> => {
           }
 
           copyFileSync(
-            resolve(dependencyDir, `./modules/${item.name}.js`),
+            resolve(dependencyDir, `./modules/${safeName(item.name)}.js`),
             resolve(targetDir, `${safeName(item.name)}.js`)
           );
           copyFileSync(
-            resolve(dependencyDir, `./modules/${item.file}.png`),
+            resolve(dependencyDir, `./modules/${safeName(item.name)}.png`),
             resolve(targetDir, `${safeName(item.name)}.png`)
           );
         }
