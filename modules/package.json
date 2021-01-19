@@ -1,6 +1,6 @@
 {
   "name": "@patchcab/modules",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "author": "Spectrome <rihards@gravis.lv>",
   "files": [
@@ -219,6 +219,6 @@
     "svelteSortOrder": "options-scripts-styles-markup"
   },
   "devDependencies": {
-    "@patchcab/core": "1.0.0"
+    "@patchcab/core": "1.0.1"
   }
 }
