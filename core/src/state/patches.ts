@@ -25,7 +25,7 @@ class Patches {
     this.patches.update(($patches) => {
       return $patches.filter(($patch) => {
         if (!input) {
-          return $patch.input.indexOf(output) !== 0 && $patch.output.indexOf(output) !== 0;
+          return $patch.input?.indexOf(output) !== 0 && $patch.output?.indexOf(output) !== 0;
         }
         return !($patch.input === input && $patch.output === output);
       });
