@@ -33,7 +33,7 @@
     right: 0px;
     bottom: 0px;
     background: var(--color-ui-bg);
-    z-index: var(--zindex-picker);
+    z-index: var(--zindex-modal);
   }
 
   button.close {

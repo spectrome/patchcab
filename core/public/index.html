@@ -6,22 +6,14 @@
     <link rel="icon" type="image/svg+xml" href="/assets/patchcab.svg" />
     <link rel="alternate icon" href="/assets/patchcab.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="preload"
-      as="font"
-      href="/assets/routed-gothic.woff2"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="preload"
-      as="font"
-      href="/assets/routed-gothic-wide.woff2"
-      crossorigin="anonymous"
-    />
+    <link rel="preload" as="font" href="/assets/routed-gothic.woff2" crossorigin="anonymous" />
+    <link rel="preload" as="font" href="/assets/routed-gothic-wide.woff2" crossorigin="anonymous" />
     <style>
       :root {
-        --zindex-cables: 9;
-        --zindex-picker: 10;
+        --zindex-cables: 8;
+        --zindex-bar: 9;
+        --zindex-modal: 10;
+        --zindex-menu: 11;
         --color-light: #eeeeee;
         --color-light-shadow: #d1d5d8;
         --color-dark: #353131;
@@ -70,8 +62,8 @@
 
       body {
         background-image: url("data:image/svg+xml,%3Csvg width='16' height='380' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23373737' d='M0 0h16v380H0z'/%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0 0h16v16H0V0zm12 8a4 4 0 11-8 0 4 4 0 018 0zM0 379v-16h16v16H0zm12-8a4 4 0 11-8 0 4 4 0 018 0z' fill='%23656565'/%3E%3C/svg%3E");
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-          sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+          Segoe UI Emoji, Segoe UI Symbol;
         border-top: 48px solid var(--color-ui-bg);
         width: 4800px;
         height: 3088px;
@@ -87,8 +79,8 @@
       button,
       a {
         color: var(--color-light);
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-          sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji,
+          Segoe UI Emoji, Segoe UI Symbol;
       }
 
       input,
