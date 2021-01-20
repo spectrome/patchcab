@@ -140,7 +140,11 @@ class Catenary {
    * Draws a straight line between two points.
    */
   private drawLine(data: number[][]) {
-    return `M${data[0][0]},${data[0][1]} L${data[1][0]},${data[1][1]}`;
+    let result = '';
+    for (let i = 0; i < data.length - 1; i++) {
+      result = result + `M${data[i][0]},${data[i][1]} L${data[i + 1][0]},${data[i + 1][1]}`;
+    }
+    return result;
   }
 
   /**
