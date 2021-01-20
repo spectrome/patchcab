@@ -65,7 +65,7 @@
     right: 0px;
     bottom: 0px;
     background: var(--color-ui-bg-secondary);
-    z-index: var(--zindex-picker);
+    z-index: var(--zindex-modal);
   }
 
   aside {

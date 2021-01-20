@@ -160,7 +160,7 @@
   </div>
 {/if}
 
-<div style="transform: translate({contextPosition.x}px, {contextPosition.y}px);">
+<div style="transform: translate({contextPosition.x}px, {contextPosition.y}px); z-index: var(--zindex-menu);">
   <Menu bind:visible={contextVisible}>
     <button on:click={onContextRemove}>Remove <strong>BACKSPACE</strong> </button>
     <hr />

@@ -91,7 +91,7 @@
     height: 48px;
     background: var(--color-ui-bg);
     color: var(--color-ui-fg);
-    z-index: 10;
+    z-index: var(--zindex-bar);
     text-align: center;
     font-size: 12px;
   }
