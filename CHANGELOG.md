@@ -1,10 +1,22 @@
+## [v1.0.4](https://github.com/spectrome/patchcab/compare/1.0.3...1.0.4)
+
+> 22 January 2021
+
+### Updates
+
+- Interface UX updates [#6](https://github.com/spectrome/patchcab/pull/6)
+
+### Modules
+
+- ADSR, LFO, VOL and OUT module parameter range tweaks [#5](https://github.com/spectrome/patchcab/pull/5)
+
 ## [v1.0.3](https://github.com/spectrome/patchcab/compare/1.0.2...1.0.3)
 
-> 19 January 2021
+> 20 January 2021
 
 ### Fixes
 
-- Straight patch cable drawn incorrectly [#3](https://github.com/spectrome/patchcab/pull/1)
+- Straight patch cable drawn incorrectly [#1](https://github.com/spectrome/patchcab/pull/1)
 - Context menu shows under cables [#2](https://github.com/spectrome/patchcab/pull/2)
 - Connecting input patch to input patch results in error [#3](https://github.com/spectrome/patchcab/pull/3)
 
