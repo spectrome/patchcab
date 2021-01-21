@@ -4,7 +4,7 @@
   import { Faceplate, Knob, Patch, Switch } from '@patchcab/core';
 
   const MIN = 0.01;
-  const MAX = 440;
+  const MAX = 20;
 
   export let state = {
     freq: 2,
@@ -20,10 +20,12 @@
 
   $: node.frequency.value = state.freq;
   $: node.type = state.type;
+
+  $: console.log(state.freq);
 </script>
 
 <Faceplate title="LFO" color="var(--color-2)" light>
-  <Knob label="frequency" x={20} y={60} bind:value={state.freq} min={MIN} max={MAX} precision={3} steps={800} />
+  <Knob label="frequency" x={20} y={60} bind:value={state.freq} min={MIN} max={MAX} precision={3} steps={1000} />
 
   <Switch x={20} y={220} bind:value={state.type} label="sin" set="sine" />
   <Switch x={60} y={220} bind:value={state.type} label="sqr" set="square" />

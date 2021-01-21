@@ -28,10 +28,10 @@
 </script>
 
 <Faceplate title="ADSR" color="var(--color-5)" light>
-  <Knob size="s" label="attack" x={27} y={60} bind:value={state.attack} min={0} max={2} precision={2} />
-  <Knob size="s" label="decay" x={27} y={122} bind:value={state.decay} min={0} max={2} precision={2} />
-  <Knob size="s" label="sustain" x={27} y={186} bind:value={state.sustain} min={0} max={1} precision={2} />
-  <Knob size="s" label="release" x={27} y={250} bind:value={state.release} min={0} max={5} precision={2} />
+  <Knob size="s" label="attack" x={27} y={60} bind:value={state.attack} min={0} max={2} precision={2} steps={1200} />
+  <Knob size="s" label="decay" x={27} y={122} bind:value={state.decay} min={0} max={2} precision={2} steps={1200} />
+  <Knob size="s" label="sustain" x={27} y={186} bind:value={state.sustain} min={0} max={1} precision={2} steps={1000} />
+  <Knob size="s" label="release" x={27} y={250} bind:value={state.release} min={0} max={5} precision={2} steps={1000} />
 
   <Patch label="gate" x={20} y={320} name="gate" input={bang} />
   <Patch label="out" x={60} y={320} name="cv" output={envelope} />
