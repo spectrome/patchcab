@@ -56,15 +56,20 @@
     display: flex;
     justify-content: space-between;
     list-style: none;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 300;
-    margin: 12px;
+    margin: 0 12px;
+    padding: 12px;
   }
 
   hr {
     border-bottom: dashed 1px var(--color-dark-highlight);
     margin: 0 6px;
     flex: 1;
+  }
+
+  li:hover hr {
+    border-color: var(--color-light-shadow);
   }
 </style>
 
@@ -95,6 +100,11 @@
         Connect more than one patch cable
         <hr />
         <strong>SHIFT+CLICK</strong>
+      </li>
+      <li>
+        Duplicate a module
+        <hr />
+        <strong>RIGHT CLICK</strong>
       </li>
       <li>
         Mute/Unmute all outputs
