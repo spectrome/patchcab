@@ -4,7 +4,7 @@
   import { Patch, Volume, Faceplate, Switch } from '@patchcab/core';
 
   const MIN = -80;
-  const MAX = 1;
+  const MAX = 2;
 
   let volume = MIN;
   let on = false;
