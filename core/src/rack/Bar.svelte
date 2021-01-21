@@ -124,9 +124,9 @@
       </svg>
     </button>
     <Menu bind:toggle={menuMainToggle}>
-      <button on:click={onAddModule}>Add module <strong>SPACE</strong></button>
-      <hr />
       <button on:click={onReset}>New <strong>CTRL+N</strong></button>
+      <hr />
+      <button on:click={onAddModule}>Add module <strong>SPACE</strong></button>
       <hr />
       <button on:click={onExport}>Save to file <strong>CTRL+S</strong></button>
       <button on:click={onImport}>Load from file <strong>CTRL+O</strong></button>
