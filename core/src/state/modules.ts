@@ -1,7 +1,6 @@
 import { HP } from 'contstants';
 import { get, writable } from 'svelte/store';
 import type { Module, State, ModuleState } from '../types';
-import patches from './patches';
 
 class Modules {
   private modules = writable<Module[]>([]);
@@ -142,16 +141,19 @@ class Modules {
     let y = 0;
     let empty = moduleList.length === 0;
 
+    const scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
+    const scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+
     while (!empty) {
       let hit = false;
       for (let i = 0; i < moduleList.length; i++) {
         const targetBox = document.getElementById(moduleList[i].id).getBoundingClientRect();
         if (
           !(
-            y + HP.h * size.h - 48 <= targetBox.y ||
-            y >= targetBox.bottom - 48 ||
-            x + HP.w * size.w <= targetBox.x ||
-            x >= targetBox.right
+            y + HP.h * size.h - 48 <= targetBox.y + scrollY ||
+            y >= targetBox.bottom - 48 + scrollY ||
+            x + HP.w * size.w <= targetBox.x + scrollX ||
+            x >= targetBox.right + scrollX
           )
         ) {
           hit = true;
