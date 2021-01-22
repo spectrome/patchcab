@@ -17,10 +17,16 @@ const useDrag: Action<OnDrag> = (node, onDrag) => {
     return;
   }
 
+  let offset: number;
+
   const onMousedown = (event: MouseEvent | TouchEvent) => {
     if (event.target !== node && (event.target as HTMLElement).getAttribute('draggable') === null) {
       return;
     }
+
+    const clientX = 'clientX' in event ? event.clientX : event.touches[0].clientX;
+    offset = clientX - node.getBoundingClientRect().left;
+
     window.addEventListener('mousemove', onMousemove, { passive: true });
     window.addEventListener('touchmove', onMousemove, { passive: true });
     window.addEventListener('mouseup', onMouseup, { passive: true });
@@ -36,7 +42,7 @@ const useDrag: Action<OnDrag> = (node, onDrag) => {
     const clientX = 'clientX' in event ? event.clientX : event.touches[0].clientX;
     const clientY = 'clientY' in event ? event.clientY : event.touches[0].clientY;
 
-    const x = clientX + scrollX - box.width / 2;
+    const x = clientX + scrollX - offset;
     const y = clientY + scrollY - BAR_HEIGHT;
 
     onDrag(x, y, box);
