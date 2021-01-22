@@ -46,8 +46,16 @@ class Patches {
   }
 
   public import($patches: Patch[]) {
+    const state = this.state;
+
     this.patches.set(
       $patches.map(($patch) => {
+        const $exists = state.find((item) => item.input === $patch.input && item.output === $patch.output);
+
+        if ($exists) {
+          return $exists;
+        }
+
         if (!$patch.color) {
           $patch.color = randomColor();
         }
