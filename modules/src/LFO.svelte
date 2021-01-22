@@ -20,8 +20,6 @@
 
   $: node.frequency.value = state.freq;
   $: node.type = state.type;
-
-  $: console.log(state.freq);
 </script>
 
 <Faceplate title="LFO" color="var(--color-2)" light>
