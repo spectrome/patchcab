@@ -1,4 +1,4 @@
-import type { Analyser } from 'Tone';
+import type { Analyser } from 'tone';
 /**
  * Frequency
  */
