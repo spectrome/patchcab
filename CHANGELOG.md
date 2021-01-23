@@ -1,3 +1,14 @@
+## [v1.0.5](https://github.com/spectrome/patchcab/compare/1.0.4...1.0.5)
+
+> 22 January 2021
+
+### Fixes
+
+- Fix empty space calculation on module addition [#7](https://github.com/spectrome/patchcab/pull/7)
+- Fix drag action to calculate cursor position offset [#8](https://github.com/spectrome/patchcab/pull/8)
+- Skip existing patches on state import [#9](https://github.com/spectrome/patchcab/pull/9)
+- Fix duplicate connection callbacks triggered [#10](https://github.com/spectrome/patchcab/pull/10)
+
 ## [v1.0.4](https://github.com/spectrome/patchcab/compare/1.0.3...1.0.4)
 
 > 22 January 2021
