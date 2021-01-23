@@ -20,12 +20,10 @@
   $: scale.min = Math.max(MIN, state.freq - state.freq * state.cv);
   $: scale.max = Math.min(MAX, state.freq + (MAX - state.freq) * state.cv);
 
-  const onConnect = () => {
-    scale.connect(filter.frequency);
-  };
-
-  const onDisconnect = (connections) => {
-    if (connections === 0) {
+  const onConnect = (nodes: number) => {
+    if (nodes) {
+      scale.connect(filter.frequency);
+    } else {
       scale.disconnect(filter.frequency);
       filter.frequency.overridden = false;
       filter.frequency.value = state.freq;
@@ -38,7 +36,7 @@
 
   <Knob size="s" label="fm" x={27} y={150} bind:value={state.cv} min={0.01} max={1} precision={2} />
 
-  <Patch label="cv" x={20} y={220} name="cv-in" input={scale} {onConnect} {onDisconnect} />
+  <Patch label="cv" x={20} y={220} name="cv-in" input={scale} {onConnect} />
 
   <Switch x={20} y={270} bind:value={state.type} label="low" set="lowpass" />
   <Switch x={60} y={270} bind:value={state.type} label="high" set="highpass" />

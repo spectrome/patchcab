@@ -42,13 +42,13 @@
     ctx.stroke();
   };
 
-  const onConnect = () => {
-    draw = true;
-    loop();
-  };
-
-  const onDisconnect = () => {
-    draw = false;
+  const onConnect = (nodes: number) => {
+    if (nodes) {
+      draw = true;
+      loop();
+    } else {
+      draw = false;
+    }
   };
 
   onMount(() => {
@@ -58,11 +58,6 @@
     ctx = canvas.getContext('2d');
   });
 </script>
-
-<Faceplate title="SCOPE" color="var(--color-3)">
-  <canvas bind:this={canvas} />
-  <Patch label="in" x={84} y={325} name="audio-1" {onConnect} {onDisconnect} input={node} />
-</Faceplate>
 
 <style>
   canvas {
@@ -74,3 +69,8 @@
     height: 180px;
   }
 </style>
+
+<Faceplate title="SCOPE" color="var(--color-3)">
+  <canvas bind:this={canvas} />
+  <Patch label="in" x={84} y={325} name="audio-1" input={node} {onConnect} />
+</Faceplate>

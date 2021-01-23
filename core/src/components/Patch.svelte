@@ -8,7 +8,6 @@
   export let x = 0;
   export let y = 0;
   export let label: string = undefined;
-  export let onDisconnect: (nodes: number) => void;
   export let onConnect: (nodes: number) => void;
 
   export let input: PatchInput;
@@ -28,6 +27,10 @@
         node: item.node,
       }));
 
+    if (typeof onConnect === 'function' && connections.length !== $connections.length) {
+      onConnect($connections.length);
+    }
+
     connections.forEach((item) => {
       if ($connections.findIndex((patch) => patch.id === item.id) < 0) {
         if (item.node) {
@@ -37,9 +40,6 @@
             } else {
               output.disconnect(item.node as Bang);
             }
-          }
-          if (item.id && typeof onDisconnect === 'function') {
-            onDisconnect($connections.length);
           }
         }
       }
@@ -57,9 +57,6 @@
             } else {
               output.connect(item.node as Bang);
             }
-          }
-          if (item.id && typeof onConnect === 'function') {
-            onConnect($connections.length);
           }
         }
       }

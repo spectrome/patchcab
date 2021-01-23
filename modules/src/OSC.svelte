@@ -21,12 +21,10 @@
   $: scale.min = Math.max(MIN, state.freq - state.freq * state.fm);
   $: scale.max = Math.min(MAX, state.freq + (MAX - state.freq) * state.fm);
 
-  const onConnect = () => {
-    scale.connect(oscillator.frequency);
-  };
-
-  const onDisconnect = (connections) => {
-    if (connections === 0) {
+  const onConnect = (nodes: number) => {
+    if (nodes) {
+      scale.connect(oscillator.frequency);
+    } else {
       scale.disconnect(oscillator.frequency);
       oscillator.frequency.overridden = false;
       oscillator.frequency.value = state.freq;
@@ -44,6 +42,6 @@
   <Switch x={20} y={270} bind:value={state.type} label="tri" set="triangle" />
   <Switch x={60} y={270} bind:value={state.type} label="saw" set="sawtooth" />
 
-  <Patch label="fm" x={20} y={320} name="signal-in" input={scale} {onConnect} {onDisconnect} />
+  <Patch label="fm" x={20} y={320} name="signal-in" input={scale} {onConnect} />
   <Patch label="out" x={60} y={320} name="audio-out" output={oscillator} />
 </Faceplate>

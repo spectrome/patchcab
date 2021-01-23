@@ -16,12 +16,10 @@
 
   $: channel.volume.value = state.volume;
 
-  const onConnect = () => {
-    scale.connect(node.gain);
-  };
-
-  const onDisconnect = (connections) => {
-    if (connections === 0) {
+  const onConnect = (nodes: number) => {
+    if (nodes) {
+      scale.connect(node.gain);
+    } else {
       scale.disconnect(node.gain);
       node.gain.value = 1;
     }
@@ -40,7 +38,7 @@
 <Faceplate title="VOL" color="var(--color-dark)">
   <Volume x={24} y={60} h={204} bind:value={state.volume} min={MIN} max={MAX} />
 
-  <Patch {onConnect} {onDisconnect} label="cv" x={40} y={280} name="cv-1" input={scale} />
+  <Patch label="cv" x={40} y={280} name="cv-1" input={scale} {onConnect} />
   <Patch label="in" x={20} y={320} name="audio-in" input={node} />
   <Patch label="out" x={60} y={320} name="audio-out" output={channel} />
 </Faceplate>
