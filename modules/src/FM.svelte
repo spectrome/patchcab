@@ -21,12 +21,10 @@
 
   $: scale.max = MAX_MOD * state.fm;
 
-  const onConnect = () => {
-    scale.connect(oscillator.modulationIndex);
-  };
-
-  const onDisconnect = (connections) => {
-    if (connections === 0) {
+  const onConnect = (nodes: number) => {
+    if (nodes) {
+      scale.connect(oscillator.modulationIndex);
+    } else {
       scale.disconnect(oscillator.modulationIndex);
       oscillator.modulationIndex.overridden = false;
       oscillator.modulationIndex.value = 3;
@@ -44,6 +42,6 @@
   <Switch x={20} y={270} bind:value={state.type} label="tri" set="triangle" />
   <Switch x={60} y={270} bind:value={state.type} label="saw" set="sawtooth" />
 
-  <Patch label="fm" x={20} y={320} name="signal-in" input={scale} {onConnect} {onDisconnect} />
+  <Patch label="fm" x={20} y={320} name="signal-in" input={scale} {onConnect} />
   <Patch label="out" x={60} y={320} name="audio-out" output={oscillator} />
 </Faceplate>

@@ -25,12 +25,10 @@
     channel.mute = !on;
   };
 
-  const onConnect = () => {
-    scale.connect(node.gain);
-  };
-
-  const onDisconnect = (connections) => {
-    if (connections === 0) {
+  const onConnect = (nodes: number) => {
+    if (nodes) {
+      scale.connect(node.gain);
+    } else {
       scale.disconnect(node.gain);
       node.gain.value = 1;
     }
@@ -59,6 +57,6 @@
 
   <Switch x={40} y={280} bind:value={on} label="on" />
 
-  <Patch label="cv" x={20} y={320} name="cv-1" {onConnect} {onDisconnect} input={scale} />
+  <Patch label="cv" x={20} y={320} name="cv-1" input={scale} {onConnect} />
   <Patch label="in" x={60} y={320} name="audio-in" input={node} />
 </Faceplate>
