@@ -21,6 +21,7 @@
     "build:web": "rollup -c",
     "build:lib": "tsc --project ./config/lib.tsconfig.json && cpy './src/components/*.svelte' './lib/components/'",
     "build:bin": "tsc --project ./config/bin.tsconfig.json",
+    "vercel-build": "npm run build && npm run build --prefix ../modules  && cpy '../modules/public/modules*' './public/'",
     "lint": "eslint './src/**/*.ts' --max-warnings 0",
     "prettier": "prettier --write './src/**/*.{ts,svelte}'",
     "prepublish": "yarn build",
