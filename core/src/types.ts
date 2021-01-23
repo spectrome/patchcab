@@ -1,4 +1,4 @@
-import type { ToneAudioNode } from 'Tone';
+import type { ToneAudioNode } from 'tone';
 import type Bang from './nodes/Bang';
 export type { default as Bang } from './nodes/Bang';
 
