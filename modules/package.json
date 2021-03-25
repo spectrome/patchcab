@@ -7,7 +7,7 @@
         "modules"
     ],
     "scripts": {
-        "start": "patchcab --rack ./patch.json ",
+        "start": "patchcab",
         "build": "patchcab --build",
         "prepublish": "yarn build"
     },
