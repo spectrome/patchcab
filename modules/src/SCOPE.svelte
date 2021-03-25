@@ -13,6 +13,7 @@
   const width = 160 * ratio;
   const height = 180 * ratio;
   const margin = 20 * ratio;
+  const sweepTriggerThresh = 0;
 
   export let state = {
     internalTrigger: false,
@@ -28,11 +29,9 @@
       drawSweptWave(wave);
       return;
     }
-    drawWave(wave);    
+    drawWave(wave);
   };
 
-  const sweepTriggerThresh = 0;
-  
   const drawSweptWave = (wave) => {
     let sweepStart = -1;
     let previousValue = wave[0];
@@ -48,7 +47,7 @@
         ctx.moveTo(0, height/2);
         ctx.beginPath();
       } else if (sweepStart == -1) {
-        // Keep scanning through wave, looking for a threshold crossing. 
+        // Keep scanning through wave, looking for a threshold crossing.
         previousValue = currentValue;
         continue;
       }
@@ -61,7 +60,7 @@
 
     ctx.strokeStyle = 'white';
     ctx.lineWidth = 2;
-    ctx.stroke(); 
+    ctx.stroke();
   }
 
   const drawWave = (wave) => {
@@ -114,7 +113,7 @@
 </style>
 
 <Faceplate title="SCOPE" color="var(--color-3)">
-  <canvas bind:this={canvas} /> 
+  <canvas bind:this={canvas} />
   <Switch square label="internal trigger" x={84} y={260} value={state.internalTrigger} onToggle={toggleTrigger}/>
   <Patch label="in" x={84} y={325} name="audio-1" input={node} {onConnect} />
 </Faceplate>
