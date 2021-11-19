@@ -67,7 +67,7 @@ const bin = async (): Promise<void> => {
     props['rack'] = JSON.parse(rackContent);
   }
 
-  indexFile = minify(indexFile.replace('props: {}', `props: ${JSON.stringify(props)}`), {
+  indexFile = await minify(indexFile.replace('props: {}', `props: ${JSON.stringify(props)}`), {
     collapseWhitespace: true,
     minifyCSS: true,
     minifyJS: true,

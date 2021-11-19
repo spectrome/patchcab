@@ -34,7 +34,7 @@
     "file-dialog": "^0.0.8",
     "file-saver": "^2.0.5",
     "html-minifier-terser": "^6.0.2",
-    "imagemin": "^8.0.1",
+    "imagemin": "^7.0.1",
     "imagemin-pngquant": "^9.0.2",
     "ncp": "^2.0.0",
     "parse-author": "^2.0.0",
