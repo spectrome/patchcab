@@ -3,7 +3,7 @@
   import type { OnClickOutside } from '../actions';
 
   export let toggle: HTMLElement;
-  export let center: boolean;
+  export let center: boolean = false;
   export let visible = false;
 
   const hideMenu: OnClickOutside = (event: MouseEvent) => {
@@ -66,13 +66,13 @@
     padding: 8px;
   }
 
-  :global(ul.menu form button) {
+  :global(ul.menu form button, .dialog form button) {
     padding: 8px 0;
     background: var(--color-ui-hover);
     justify-content: center;
   }
 
-  :global(ul.menu form button:hover) {
+  :global(ul.menu form button:hover, .dialog form button:hover) {
     background: var(--color-ui-bg-secondary);
   }
 

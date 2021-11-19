@@ -1,6 +1,7 @@
 <script lang="ts">
   import { saveAs } from 'file-saver';
   import fileDialog from 'file-dialog';
+  import Dialog from './Dialog.svelte';
   import Menu from './Menu.svelte';
   import Share from './Share.svelte';
   import { isShortcut } from '../helpers';
@@ -13,6 +14,7 @@
   export let title: string;
 
   let menuMainToggle: HTMLElement;
+  let showResetDialog = false;
 
   const onAddModule = () => {
     view = 'shelf';
@@ -33,6 +35,10 @@
 
   const onReset = () => {
     stateReset();
+  };
+
+  const onToggleResetDialog = () => {
+    showResetDialog = !showResetDialog;
   };
 
   const onImport = () => {
@@ -63,7 +69,7 @@
     if (isShortcut(e) && e.ctrlKey) {
       if (e.key === 'n') {
         e.preventDefault();
-        stateReset();
+        showResetDialog = true;
       }
 
       if (e.key === 's') {
@@ -113,6 +119,33 @@
   nav button svg {
     pointer-events: none;
   }
+
+  .reset h6 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .reset p {
+    display: block;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .reset div {
+    display: flex;
+  }
+  .reset button {
+    flex: 1;
+  }
+
+  .reset button:last-of-type {
+    margin-left: 16px;
+  }
+
+  .reset button[type='submit'] {
+    color: var(--color-5);
+  }
 </style>
 
 <svelte:body on:keydown={onKey} />
@@ -124,7 +157,7 @@
       </svg>
     </button>
     <Menu bind:toggle={menuMainToggle}>
-      <button on:click={onReset}>New <strong>CTRL+N</strong></button>
+      <button on:click={onToggleResetDialog}>New <strong>CTRL+N</strong></button>
       <hr />
       <button on:click={onAddModule}>Add module <strong>SPACE</strong></button>
       <hr />
@@ -146,9 +179,19 @@
     </Menu>
   </nav>
   <div>
-    {#if api}
+    {#if !api}
       <Share {api} bind:title />
     {/if}
   </div>
   <div />
+  <Dialog bind:visible={showResetDialog}>
+    <form class="reset">
+      <h6>Do you want to clear the current patch?</h6>
+      <p>Your changes on current patch will be lost.</p>
+      <div>
+        <button on:click={onToggleResetDialog} type="button">Cancel</button>
+        <button on:click={onReset} type="submit">Clear</button>
+      </div>
+    </form>
+  </Dialog>
 </header>

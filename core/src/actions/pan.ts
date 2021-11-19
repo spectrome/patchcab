@@ -27,7 +27,6 @@ const usePan: Action<OnPan> = (node, onMove) => {
     window.addEventListener('touchmove', onMousemove, { passive: true });
     window.addEventListener('mouseup', onMouseup, { passive: true });
     window.addEventListener('touchend', onMouseup, { passive: true });
-    window.addEventListener('wheel', onWheel, { passive: false });
   };
 
   const onMousemove = (event: MouseEvent | TouchEvent) => {
@@ -48,16 +47,16 @@ const usePan: Action<OnPan> = (node, onMove) => {
     window.removeEventListener('touchmove', onMousemove);
     window.removeEventListener('mouseup', onMouseup);
     window.removeEventListener('touchend', onMouseup);
-    window.removeEventListener('wheel', onWheel);
   };
 
   const onWheel = (event: WheelEvent) => {
     event.preventDefault();
-    onMove({x, y, dx:0, dy:event.deltaY});
+    onMove({ x: event.clientX, y: event.clientY, dx: event.deltaX, dy: event.deltaY });
   };
 
   node.addEventListener('mousedown', onMousedown, { passive: true });
   node.addEventListener('touchstart', onMousedown, { passive: true });
+  node.addEventListener('wheel', onWheel, { passive: false });
 
   return {
     destroy() {

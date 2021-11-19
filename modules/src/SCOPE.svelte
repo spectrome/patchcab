@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Waveform } from 'Tone';
   import { scale, onMount } from '@patchcab/core';
-  import { Faceplate, Patch, Switch } from '@patchcab/core';
+  import { Faceplate, Patch, Knob, Switch } from '@patchcab/core';
 
   let node = new Waveform(512);
 
@@ -16,7 +16,9 @@
   const sweepTriggerThresh = 0;
 
   export let state = {
-    internalTrigger: false,
+    trigger: false,
+    level: 0,
+    holdoff: 1,
   };
 
   const loop = () => {
@@ -25,50 +27,40 @@
     }
     requestAnimationFrame(loop);
     const wave = node.getValue();
-    if (state.internalTrigger) {
-      drawSweptWave(wave);
-      return;
-    }
     drawWave(wave);
   };
 
-  const drawSweptWave = (wave) => {
-    let sweepStart = -1;
-    let previousValue = wave[0];
-    for (let i = 0, len = wave.length; i < len; i++) {
-      const currentValue = wave[i];
+  const drawWave = (input) => {
+    ctx.fillStyle = `rgba(35, 45, 48, ${state.trigger ? '0.2' : '1'})`;
+    ctx.fillRect(0, 0, width, height);
 
-      // Start the sweep if the signal passed through the threshold value at any point between
-      // prevousValue and currentValue, inclusive.
-      if (sweepStart == -1 && (currentValue > sweepTriggerThresh && previousValue < sweepTriggerThresh)) {
-        sweepStart = i;
-        ctx.fillStyle = "rgba(0, 0, 0, 0.1)"; // 0.1 opacity gradually fades out over successive redraws.
-        ctx.fillRect(0, 0, width, height)
-        ctx.moveTo(0, height/2);
-        ctx.beginPath();
-      } else if (sweepStart == -1) {
-        // Keep scanning through wave, looking for a threshold crossing.
-        previousValue = currentValue;
-        continue;
+    let wave = input;
+
+    if (state.trigger) {
+      let sweep = 0;
+      for (let i = 1, len = input.length; i < len; i++) {
+        if (input[i] > state.level && input[i - 1] < state.level) {
+          sweep = i;
+          break;
+        }
+      }
+      if (sweep > 0) {
+        wave = input.slice(sweep);
       }
 
-      const x = scale(i-sweepStart, [0, len - 1], [0, width], 0);
-      const y = scale(wave[i], [-1, 1], [height - margin, 0 + margin], 0);
-
-      ctx.lineTo(x, y);
+      ctx.beginPath();
+      const levelPos = scale(state.level, [-1, 1], [height - margin, 0 + margin], 0);
+      ctx.moveTo(0, levelPos, 0);
+      ctx.lineTo(width, levelPos);
+      ctx.strokeStyle = 'rgba(255, 255, 0, 0.1)';
+      ctx.lineWidth = 3;
+      ctx.stroke();
     }
 
-    ctx.strokeStyle = 'white';
-    ctx.lineWidth = 2;
-    ctx.stroke();
-  }
-
-  const drawWave = (wave) => {
-    ctx.clearRect(0, 0, width, height);
     ctx.beginPath();
 
     for (let i = 0, len = wave.length; i < len; i++) {
-      const x = scale(i, [0, len - 1], [0, width], 0);
+      const x = scale(i, [0, input.length - 1], [0, width], 0);
       const y = scale(wave[i], [-1, 1], [height - margin, 0 + margin], 0);
       if (i === 0) {
         ctx.moveTo(x, y);
@@ -98,7 +90,9 @@
     ctx = canvas.getContext('2d');
   });
 
-  const toggleTrigger = () => {state.internalTrigger = !state.internalTrigger};
+  const toggleTrigger = () => {
+    state.trigger = !state.trigger;
+  };
 </script>
 
 <style>
@@ -114,6 +108,7 @@
 
 <Faceplate title="SCOPE" color="var(--color-3)">
   <canvas bind:this={canvas} />
-  <Switch square label="internal trigger" x={84} y={260} value={state.internalTrigger} onToggle={toggleTrigger}/>
+  <Knob size="s" label="level" x={72} y={254} bind:value={state.level} min={-0.9} max={0.9} precision={2} />
+  <Switch square label="trigger" x={23} y={264} value={state.trigger} onToggle={toggleTrigger} />
   <Patch label="in" x={84} y={325} name="audio-1" input={node} {onConnect} />
 </Faceplate>
