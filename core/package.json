@@ -21,7 +21,6 @@
     "build:web": "rollup -c",
     "build:lib": "tsc --project ./config/lib.tsconfig.json && cpy './src/components/*.svelte' './lib/components/'",
     "build:bin": "tsc --project ./config/bin.tsconfig.json",
-    "vercel-build": "yarn build && yarn --cwd ../modules build && cpy '../modules/public/modules.json' './public/' && cpy '../modules/public/modules' './public/modules/@patchcab-modules'",
     "lint": "eslint './src/**/*.ts' --max-warnings 0",
     "prettier": "prettier --write './src/**/*.{ts,svelte}'",
     "prepublish": "yarn build",

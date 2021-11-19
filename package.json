@@ -5,5 +5,8 @@
     "core",
     "modules"
   ],
+  "scripts": {
+    "build": "yarn --cwd ./core build && yarn --cwd ./modules build && cpy './modules/public/modules.json' './core/public/' && cpy './modules/public/modules' './core/public/modules/@patchcab-modules'"
+  },
   "dependencies": {}
 }
