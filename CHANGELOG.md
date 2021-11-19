@@ -1,3 +1,16 @@
+## [v1.1.0](https://github.com/spectrome/patchcab/compare/1.0.5...1.1.0)
+
+> 19 Novmber 2021
+
+### Updates
+
+- Add synth reset confirmation dialog
+- Add mouse wheel support on pan actions [#15](https://github.com/spectrome/patchcab/pull/15)
+
+### Modules
+
+- Add internal trigger sweep to `OSC` module [#13](https://github.com/spectrome/patchcab/pull/13)
+
 ## [v1.0.5](https://github.com/spectrome/patchcab/compare/1.0.4...1.0.5)
 
 > 22 January 2021

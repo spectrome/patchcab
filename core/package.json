@@ -1,6 +1,6 @@
 {
   "name": "@patchcab/core",
-  "version": "1.0.5",
+  "version": "1.1.1",
   "description": "Modular Eurorack style synthesizer made with Web Audio",
   "license": "MIT",
   "author": "Spectrome <rihards@gravis.lv>",
