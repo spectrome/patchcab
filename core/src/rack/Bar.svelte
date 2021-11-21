@@ -35,6 +35,7 @@
 
   const onReset = () => {
     stateReset();
+    showResetDialog = false;
   };
 
   const onToggleResetDialog = () => {
@@ -123,12 +124,12 @@
   .reset h6 {
     font-size: 13px;
     font-weight: 600;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
   }
 
   .reset p {
     display: block;
-    margin-bottom: 18px;
+    margin-bottom: 24px;
     text-align: left;
   }
 
@@ -141,9 +142,6 @@
 
   .reset button:last-of-type {
     margin-left: 16px;
-  }
-
-  .reset button[type='submit'] {
     color: var(--color-5);
   }
 </style>
@@ -179,19 +177,19 @@
     </Menu>
   </nav>
   <div>
-    {#if !api}
+    {#if api}
       <Share {api} bind:title />
     {/if}
   </div>
   <div />
   <Dialog bind:visible={showResetDialog}>
-    <form class="reset">
+    <div class="reset">
       <h6>Do you want to clear the current patch?</h6>
       <p>Your changes on current patch will be lost.</p>
       <div>
-        <button on:click={onToggleResetDialog} type="button">Cancel</button>
-        <button on:click={onReset} type="submit">Clear</button>
+        <button type="button" on:click={onToggleResetDialog}>Cancel</button>
+        <button type="button" on:click={onReset}>Clear</button>
       </div>
-    </form>
+    </div>
   </Dialog>
 </header>
