@@ -66,13 +66,13 @@
     padding: 8px;
   }
 
-  :global(ul.menu form button, .dialog form button) {
+  :global(ul.menu form button, .dialog button) {
     padding: 8px 0;
     background: var(--color-ui-hover);
     justify-content: center;
   }
 
-  :global(ul.menu form button:hover, .dialog form button:hover) {
+  :global(ul.menu form button:hover, .dialog button:hover) {
     background: var(--color-ui-bg-secondary);
   }
 
