@@ -1,6 +1,14 @@
+## [v1.1.3](https://github.com/spectrome/patchcab/compare/1.1.1...1.1.3)
+
+> 21 November 2021
+
+### Fixes
+
+- Fix rack reset refreshes whole page instead of resetting the modules [#18](https://github.com/spectrome/patchcab/pull/18)
+
 ## [v1.1.0](https://github.com/spectrome/patchcab/compare/1.0.5...1.1.0)
 
-> 19 Novmber 2021
+> 19 November 2021
 
 ### Updates
 
