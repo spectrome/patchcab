@@ -1,7 +1,7 @@
 <script lang="ts">
   import patches from '../state/patches';
   import modules from '../state/modules';
-  import Catenary from '../helpers/Catenary';
+  import { getCatenaryPath } from '../helpers/Catenary';
   import Point from '../helpers/Point';
   import { BAR_HEIGHT } from '../contstants';
   import type { Patch } from '../types';
@@ -47,11 +47,9 @@
           boxY.top - 50 + Math.round(elY.offsetHeight / 2) + 2 + scrollY
         );
 
-        let chain = new Catenary();
-
         if (patch.selected) {
           activeCable = {
-            path: chain.getPath(p1, p2),
+            path: getCatenaryPath(p1, p2),
             color: patch.color,
             point: patch.selected === patch.input ? p2 : p1,
           };
@@ -62,7 +60,7 @@
         }
 
         return {
-          path: chain.getPath(p1, p2),
+          path: getCatenaryPath(p1, p2),
           color: patch.color,
         };
       })
@@ -88,9 +86,8 @@
     const clientY = 'clientY' in event ? event.clientY : event.touches[0].clientY;
 
     const point = new Point(clientX + scrollX, clientY + scrollY - BAR_HEIGHT);
-    const chain = new Catenary();
 
-    const path = chain.getPath(activeCable.point, point);
+    const path = getCatenaryPath(activeCable.point, point);
 
     activeCable = {
       ...activeCable,
@@ -121,22 +118,20 @@
     opacity: 1;
     z-index: var(--zindex-cables);
   }
+  svg path {
+    stroke-linecap: round;
+    fill: none;
+  }
 </style>
 
 <svelte:body on:mousemove={onMove} on:touchmove={onMove} />
 
 <svg>
   {#each cables as cable}
-    <path stroke={darken(cable.color, -40)} stroke-linecap="round" stroke-width="5" fill="none" d={cable.path} />
-    <path stroke={cable.color} stroke-linecap="round" stroke-width="3" fill="none" d={cable.path} />
+    <path stroke={darken(cable.color, -40)} stroke-width="5" d={cable.path} />
+    <path stroke={cable.color} stroke-width="3" d={cable.path} />
   {/each}
   {#if activeCable}
-    <path
-      stroke={darken(activeCable.color, -40)}
-      stroke-linecap="round"
-      stroke-width="5"
-      fill="none"
-      d={activeCable.path}
-    />
+    <path stroke={darken(activeCable.color, -40)} stroke-width="5" fill="none" d={activeCable.path} />
   {/if}
 </svg>
