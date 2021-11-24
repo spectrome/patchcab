@@ -48,7 +48,8 @@ const screenshot = async (modules: Module[], PATH_BUILD: string, PATH_PUBLIC: st
 	})
 </script>`
     )
-    .replace(/href="\//g, `href="http://localhost:${PORT}/`);
+    .replace(/href="\//g, `href="http://localhost:${PORT}/`)
+    .replace(/url\('\//g, `url('http://localhost:${PORT}/`);
 
   const page = await browser.newPage();
 
@@ -68,7 +69,7 @@ const screenshot = async (modules: Module[], PATH_BUILD: string, PATH_PUBLIC: st
       deviceScaleFactor: 2,
     });
 
-    await page.setContent(html);
+    await page.setContent(html, { waitUntil: 'networkidle0' });
 
     await page.screenshot({
       path: path.resolve(PATH_BUILD, `${fileName}.png`),
