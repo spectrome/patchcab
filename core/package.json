@@ -21,6 +21,7 @@
     "build:web": "rollup -c",
     "build:lib": "tsc --project ./config/lib.tsconfig.json && cpy './src/components/*.svelte' './lib/components/'",
     "build:bin": "tsc --project ./config/bin.tsconfig.json",
+    "build:doc": "ts-node -P ./config/types.tsconfig.json ./config/svelteTypes.ts && typedoc ./types/lib.d.ts --tsconfig ./config/docs.tsconfig.json --out ./docs/",
     "lint": "eslint './src/**/*.ts' --max-warnings 0",
     "prettier": "prettier --write './src/**/*.{ts,svelte}'",
     "prepublish": "yarn build",
@@ -72,6 +73,8 @@
     "cpy-cli": "^3.1.1",
     "eslint": "^8.2.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0"
+    "eslint-plugin-prettier": "^4.0.0",
+    "svelte2tsx": "^0.4.10",
+    "typedoc": "^0.22.10"
   }
 }

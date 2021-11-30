@@ -3,3 +3,5 @@ node_modules
 /bin
 public/modules*
 public/js*
+docs
+types
