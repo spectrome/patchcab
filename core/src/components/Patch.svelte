@@ -1,14 +1,19 @@
 <script lang="ts">
-  import type { ToneAudioNode } from 'Tone';
+  import { Meter, ToneAudioNode, Draw } from 'Tone';
   import { getContext, onMount } from 'svelte';
   import patches from '../state/patches';
   import Label from './Label.svelte';
-  import type { Bang, Connection, PatchInput, PatchOutput } from '../types';
+  import { Connection, PatchInput, PatchOutput } from '../types';
+  import Bang from '../nodes/Bang';
 
   export let x = 0;
   export let y = 0;
   export let label: string = undefined;
   export let onConnect: (nodes: number) => void;
+
+  export let state = {
+    amplitude: 0,
+  };
 
   export let input: PatchInput;
   export let output: PatchOutput;
@@ -41,6 +46,18 @@
               output.disconnect(item.node as Bang);
             }
           }
+          if (input) {
+            if ('toDestination' in item.node) {
+              try {
+                item.node.disconnect(analyser);
+                analyser = null;
+              } catch (e) {
+                console.error(e);
+              }
+            } else {
+              // TODO:
+            }
+          }
         }
       }
     });
@@ -56,6 +73,13 @@
               output.connect(item.node as ToneAudioNode);
             } else {
               output.connect(item.node as Bang);
+            }
+          }
+          if (input) {
+            if ('toDestination' in item.node) {
+              analyser = item.node.context.createAnalyser();
+              buffer = new Float32Array(analyser.frequencyBinCount);
+              item.node.connect(analyser);
             }
           }
         }
@@ -127,7 +151,48 @@
     }
   };
 
+  let analyser: AnalyserNode | undefined;
+  let buffer: Float32Array | undefined;
+
+  const draw = () => {
+    Draw.schedule(draw, '+100hz');
+    if (!analyser || !buffer) {
+      // console.warn('no analyser or no buffer');
+      return;
+    }
+
+    analyser.getFloatTimeDomainData(buffer);
+    const totalSquared = buffer.reduce((total, current) => total + current * current, 0);
+    const rms = Math.sqrt(totalSquared / buffer.length);
+    const amplitude = rms;
+    state.amplitude = amplitude;
+  };
+
   onMount(() => {
+    if (output) {
+      if ('toDestination' in output) {
+        const context = output.context;
+        analyser = context.createAnalyser();
+        buffer = new Float32Array(analyser.frequencyBinCount);
+        output.connect(analyser);
+      } else {
+        const meterBang = new Bang((_time, attack, release) => {
+          if (attack) {
+            state.amplitude = 1;
+          }
+          if (release) {
+            // TODO: clear timeout on attack?
+            setTimeout(() => {
+              state.amplitude = 0;
+            }, 100);
+          }
+        });
+        output.connect(meterBang);
+      }
+    }
+
+    draw();
+
     return () => {
       if (input && 'toDestination' in input) {
         input.dispose();
@@ -136,6 +201,8 @@
       if (output && 'toDestination' in output) {
         output.dispose();
       }
+
+      // TODO: stop drawing
     };
   });
 </script>
@@ -165,11 +232,12 @@
   on:touchstart|passive={onPatchClick}
   on:mouseup={onPatchRelease}
   on:touchend={onPatchRelease}
-  style="left: {x}px; top: {y}px;">
+  style="left: {x}px; top: {y}px;"
+>
   <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="9" cy="9" r="9" fill="var(--color-6)" class="ring" />
     <circle cx="9" cy="9" r="8" fill="var(--color-light)" />
-    <circle cx="9" cy="9" r="5" fill="#222" />
+    <circle cx="9" cy="9" r="5" style="fill: hsl(0, 0%, {state.amplitude * 100}%)" />
   </svg>
   {#if label}
     <Label top={-1}>{label}</Label>
