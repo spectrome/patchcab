@@ -51,6 +51,7 @@
               try {
                 item.node.disconnect(analyser);
                 analyser = null;
+                state.amplitude = 0;
               } catch (e) {
                 console.error(e);
               }
@@ -164,8 +165,7 @@
     analyser.getFloatTimeDomainData(buffer);
     const totalSquared = buffer.reduce((total, current) => total + current * current, 0);
     const rms = Math.sqrt(totalSquared / buffer.length);
-    const amplitude = rms;
-    state.amplitude = amplitude;
+    state.amplitude = rms;
   };
 
   onMount(() => {
