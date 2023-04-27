@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Meter, ToneAudioNode, Draw } from 'Tone';
+  import { ToneAudioNode, Draw } from 'Tone';
   import { getContext, onMount } from 'svelte';
   import patches from '../state/patches';
   import Label from './Label.svelte';
